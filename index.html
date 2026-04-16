@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SMS Fraud Detector</title>
+</head>
+<body style="text-align: center; background-color: antiquewhite; padding-top: 120px;">
+  <h1>SMS Fraud Detector</h1>
+  <textarea id="msg" rows="6" cols="60" placeholder="Paste SMS text here"></textarea><br>
+  <button onclick="classify()">check</button>
+  <pre id="result"></pre>
+
+  <script>
+    const API_URL = "https://agotephrlj.execute-api.eu-west-2.amazonaws.com/default/sms-spam-detector"; 
+
+    async function classify() {
+      const text = document.getElementById("msg").value;
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({text})
+      });
+      const data = await resp.json();
+      document.getElementById("result").textContent = JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
