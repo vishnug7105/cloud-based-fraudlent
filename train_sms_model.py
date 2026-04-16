@@ -35,7 +35,7 @@ def build_pipeline():
     clf = LogisticRegression(
         max_iter=1000,
         class_weight="balanced",
-        solver="liblinear"   # stable + supports n_jobs
+        solver="liblinear"   
     )
 
     pipeline = Pipeline([
